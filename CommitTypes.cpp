@@ -37,7 +37,7 @@ const std::vector<CommitType> &getCommitStatuses()
 {
   static const std::vector<CommitType> statuses = {
       {"wip", ":construction:", "🚧"},
-      {"completed", ":white_check_mark:", "✅"},
+      {"completed", ":heavy_check_mark:", "✔️"},
   };
   return statuses;
 }

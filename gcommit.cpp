@@ -66,12 +66,13 @@ int main()
   std::string prefix;
   if (!type.emoji.empty())
   {
-    prefix += type.emoji + " ";
+    prefix += type.emoji;
   }
   if (!status.emoji.empty())
   {
-    prefix += status.emoji + " ";
+    prefix += status.emoji; 
   }
+  prefix += " ";
   prefix += type.id;
 
   std::string message;
@@ -87,7 +88,7 @@ int main()
   std::cout << "Final git commit message: \n"
             << message << '\n';
 
-  std::string confirm = prompt("Confirm? (y)");
+  std::string confirm = prompt("Confirm? (y): ");
   if (confirm != "y")
     return 0;
   std::cout << '\n';
