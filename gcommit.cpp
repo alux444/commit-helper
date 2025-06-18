@@ -45,12 +45,17 @@ int main()
 
   // Choose commit type (required)
   CommitType type = selectCommit(types, "Select a commit type:");
+  std::cout << '\n';
 
   // Choose commit status (optional)
   CommitType status = selectCommit(statuses, "Select a commit status (optional):", true);
+  std::cout << '\n';
 
   std::string scope = prompt("Enter scope (optional, press Enter to skip): ");
+  std::cout << '\n';
+
   std::string desc = prompt("Enter short description: ");
+  std::cout << '\n';
 
   if (desc.empty())
   {
@@ -59,6 +64,10 @@ int main()
   }
 
   std::string prefix;
+  if (!type.emoji.empty())
+  {
+    prefix += type.emoji + " ";
+  }
   if (!status.emoji.empty())
   {
     prefix += status.emoji + " ";
@@ -74,6 +83,14 @@ int main()
   {
     message = prefix + ": " + desc;
   }
+
+  std::cout << "Final git commit message: \n"
+            << message << '\n';
+
+  std::string confirm = prompt("Confirm? (y)");
+  if (confirm != "y")
+    return 0;
+  std::cout << '\n';
 
   std::string command = "git commit -m \"" + message + "\"";
   std::cout << "Running: " << command << "\n";
