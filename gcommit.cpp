@@ -43,12 +43,10 @@ int main()
   const auto &types = getCommitTypes();
   const auto &statuses = getCommitStatuses();
 
-  // Choose commit type (required)
   CommitType type = selectCommit(types, "Select a commit type:");
   std::cout << '\n';
 
-  // Choose commit status (optional)
-  CommitType status = selectCommit(statuses, "Select a commit status (optional):", true);
+  std::string wip = prompt("Is this commit WIP? (y): ");
   std::cout << '\n';
 
   std::string scope = prompt("Enter scope (optional, press Enter to skip): ");
@@ -64,14 +62,17 @@ int main()
   }
 
   std::string prefix;
+
   if (!type.emoji.empty())
   {
     prefix += type.emoji;
   }
-  if (!status.emoji.empty())
+
+  if (wip == "y")
   {
-    prefix += status.emoji; 
+    prefix += statuses[0].emoji;
   }
+
   prefix += " ";
   prefix += type.id;
 
