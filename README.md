@@ -15,5 +15,12 @@ mv gcommit ~/.local/bin/
 chmod +x ~/.local/bin/gcommit
 ```
 
-### Add to .zshrc
+### Create .zshrc if needed
+`touch ~/.zshrc`
+`vim ~/.zshrc`
+
+### Add this line to the .zshrc file
 `export PATH="$HOME/.local/bin:$PATH"`
+
+### Running
+The binary should be able to be run through `gcommit` in a terminal
