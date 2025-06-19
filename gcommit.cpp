@@ -58,12 +58,27 @@ int selectCategory(const std::vector<CommitTypeCategory> &categories, const std:
   std::cout << "0) Go back\n";
 
   int catChoice = -1;
-  while (catChoice < 0 || catChoice > static_cast<int>(categories.size()))
+  while (true)
   {
     std::cout << "Enter choice [0-" << categories.size() << "]: ";
     std::cin >> catChoice;
-    std::cin.ignore();
+
+    if (std::cin.fail())
+    {
+      std::cin.clear();             // clear error flag
+      std::cin.ignore(10000, '\n'); // discard invalid input
+      std::cerr << "❌ Invalid input. Please enter a number.\n";
+      continue;
+    }
+
+    std::cin.ignore(); // discard leftover newline
+
+    if (catChoice >= 0 && catChoice <= static_cast<int>(categories.size()))
+      break;
+
+    std::cerr << "❌ Invalid choice. Try again.\n";
   }
+
   return (catChoice == 0) ? -1 : catChoice;
 }
 
@@ -85,14 +100,30 @@ const CommitType &selectCommit(
     std::cout << "0) Go back\n";
 
   int choice = -1;
-  while (choice < (allowBack ? 0 : 1) || choice > static_cast<int>(options.size()))
+  while (true)
   {
     std::cout << "Enter choice [";
     if (allowBack)
       std::cout << "0-";
     std::cout << options.size() << "]: ";
+
     std::cin >> choice;
-    std::cin.ignore();
+
+    if (std::cin.fail())
+    {
+      std::cin.clear();
+      std::cin.ignore(10000, '\n');
+      std::cerr << "❌ Invalid input. Please enter a number.\n";
+      continue;
+    }
+
+    std::cin.ignore(); // discard newline
+
+    int minChoice = allowBack ? 0 : 1;
+    if (choice >= minChoice && choice <= static_cast<int>(options.size()))
+      break;
+
+    std::cerr << "❌ Invalid choice. Try again.\n";
   }
 
   static CommitType empty = {"", "", ""};
