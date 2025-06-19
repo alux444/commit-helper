@@ -114,7 +114,8 @@ std::string prompt(const std::string &label, bool allowBack, const std::string &
   return input;
 }
 
-void resetCommitState(std::string &wip, std::string &scope, std::string &desc, const CommitType *&type) {
+void resetCommitState(std::string &wip, std::string &scope, std::string &desc, const CommitType *&type)
+{
   wip.clear();
   scope.clear();
   desc.clear();
@@ -138,11 +139,11 @@ bool handleCommitFlow(
     }
     type = &selected;
 
-    wip = prompt("Is this commit WIP? (y)", true, buildCommitPreview(type, wip, scope, desc, statuses));
+    wip = prompt("Is this commit WIP? (y/n)", true, buildCommitPreview(type, wip, scope, desc, statuses));
     if (wip == "0")
       continue;
 
-    scope = prompt("Enter scope (optional, press Enter to skip)", true, buildCommitPreview(type, wip, scope, desc, statuses));
+    scope = prompt("Enter scope (press Enter to skip)", true, buildCommitPreview(type, wip, scope, desc, statuses));
     if (scope == "0")
       continue;
 
@@ -169,11 +170,11 @@ bool handleCommitFlow(
 
     std::string message = buildCommitPreview(type, wip, scope, desc, statuses);
 
-    std::string confirm = prompt("Confirm? (y)", true, message);
+    std::string confirm = prompt("Confirm?", true, message);
     if (confirm == "0")
       continue;
-    if (confirm != "y")
-      return true; 
+    if (!confirm.empty())
+      return true;
 
     std::string command = "git commit -m \"" + message + "\"";
 

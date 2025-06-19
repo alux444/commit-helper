@@ -45,6 +45,7 @@ static const std::vector<CommitType> configuration = {
 static const std::vector<CommitType> style = {
     {"style", ":art:", "🎨"},
     {"types", ":label:", "🏷️"},
+    {"lint", ":shirt:", "👕"},
 };
 
 static const std::vector<CommitType> testing = {
@@ -57,24 +58,24 @@ static const std::vector<CommitType> deployment = {
 
 const std::vector<CommitTypeCategory> &getCommitTypeCategories()
 {
-  static const std::vector<CommitTypeCategory> categories = {
-      {"features", features},
-      {"fixes", fixes},
-      {"maintenance", maintenance},
-      {"documentation", documentation},
-      {"configuration", configuration},
-      {"style", style},
-      {"testing", testing},
-      {"deployment", deployment},
-      {"dependencies", dependencies},
-  };
-  return categories;
+    static const std::vector<CommitTypeCategory> categories = {
+        {"features", features},
+        {"fixes", fixes},
+        {"maintenance", maintenance},
+        {"documentation", documentation},
+        {"configuration", configuration},
+        {"style", style},
+        {"testing", testing},
+        {"deployment", deployment},
+        {"dependencies", dependencies},
+    };
+    return categories;
 }
 
 const std::vector<CommitType> &getCommitStatuses()
 {
-  static const std::vector<CommitType> statuses = {
-      {"wip", ":construction:", "🚧"},
-  };
-  return statuses;
+    static const std::vector<CommitType> statuses = {
+        {"wip", ":construction:", "🚧"},
+    };
+    return statuses;
 }
