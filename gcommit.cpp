@@ -1,6 +1,7 @@
 #include "CommitTypes.h"
 #include <iostream>
 #include <string>
+#include <vector>
 #include <cstdlib>
 
 const CommitType &selectCommit(const std::vector<CommitType> &options, const std::string &promptText, bool allowSkip = false)
@@ -40,10 +41,27 @@ std::string prompt(const std::string &label)
 
 int main()
 {
-  const auto &types = getCommitTypes();
+  const auto &categories = getCommitTypeCategories();
   const auto &statuses = getCommitStatuses();
 
-  CommitType type = selectCommit(types, "Select a commit type:");
+  // Present categories to user
+  std::cout << "Select a commit category:\n";
+  for (size_t i = 0; i < categories.size(); ++i)
+  {
+    std::cout << i + 1 << ") " << categories[i].first << "\n";
+  }
+  int catChoice = -1;
+  while (catChoice < 1 || catChoice > (int)categories.size())
+  {
+    std::cout << "Enter choice [1-" << categories.size() << "]: ";
+    std::cin >> catChoice;
+    std::cin.ignore();
+  }
+  const auto &subtypes = categories[catChoice - 1].second;
+
+  // Now select the actual type within the chosen category
+  CommitType type = selectCommit(subtypes, "Select a commit type:");
+
   std::cout << '\n';
 
   std::string wip = prompt("Is this commit WIP? (y): ");
@@ -97,5 +115,5 @@ int main()
   std::string command = "git commit -m \"" + message + "\"";
   std::cout << "Running: " << command << "\n";
 
-  return system(command.c_str());
+  // return system(command.c_str());
 }

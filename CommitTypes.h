@@ -8,5 +8,7 @@ struct CommitType {
     std::string emoji;
 };
 
-const std::vector<CommitType>& getCommitTypes();
+using CommitTypeCategory = std::pair<std::string, std::vector<CommitType>>;
+
+const std::vector<CommitTypeCategory>& getCommitTypeCategories();
 const std::vector<CommitType>& getCommitStatuses();
