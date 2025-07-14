@@ -27,12 +27,16 @@ static const std::vector<CommitType> maintenance = {
     {"remove logging", ":mute:", "🔇"},
     {"add logging", ":loud_sound:", "🔊"},
     {"move files", ":truck:", "🚚"},
+    {"rename", ":pencil2", "✏️"},
     {"removed", ":coffin:", "⚰️"},
     {"revert", ":rewind:", "⏪"},
 };
 
 static const std::vector<CommitType> documentation = {
     {"docs", ":memo:", "📝"},
+    {"comments", ":speech_balloon:", "💬"},
+    {"changelog", ":ledger:", "📒"},
+    {"spelling", ":pencil2:", "✏️"},
 };
 
 static const std::vector<CommitType> configuration = {
@@ -40,6 +44,7 @@ static const std::vector<CommitType> configuration = {
     {"ci", ":green_heart:", "💚"},
     {"docker", ":whale:", "🐳"},
     {"infra", ":bricks:", "🧱"},
+    {"analytics", ":bar_chart:", "📊"},
 };
 
 static const std::vector<CommitType> style = {
@@ -50,10 +55,9 @@ static const std::vector<CommitType> style = {
 
 static const std::vector<CommitType> testing = {
     {"test", ":test_tube:", "🧪"},
-};
-
-static const std::vector<CommitType> deployment = {
-    {"deploy", ":rocket:", "🚀"},
+    {"unit test", ":microscope:", "🔬"},
+    {"integration test", ":dna:", "🧬"},
+    {"mocks", ":clown_face", "🤡"},
 };
 
 const std::vector<CommitTypeCategory> &getCommitTypeCategories()
@@ -63,10 +67,9 @@ const std::vector<CommitTypeCategory> &getCommitTypeCategories()
         {"fixes", fixes},
         {"maintenance", maintenance},
         {"documentation", documentation},
-        {"configuration", configuration},
+        {"devops / infra / config", configuration},
         {"style", style},
         {"testing", testing},
-        {"deployment", deployment},
         {"dependencies", dependencies},
     };
     return categories;
